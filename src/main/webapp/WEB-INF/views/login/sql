@@ -1,0 +1,12 @@
+CREATE TABLE `user` (
+  `seq` int(11) NOT NULL AUTO_INCREMENT,
+  `id` varchar(20) DEFAULT NULL,
+  `name` varchar(20) DEFAULT NULL,
+  `password` varchar(20) DEFAULT NULL,
+  `addr1` varchar(100) DEFAULT NULL,
+  `addr2` varchar(100) DEFAULT NULL,
+  `phone` int(11) DEFAULT NULL,
+  `regdate` date DEFAULT NULL,
+  `updatedate` date DEFAULT NULL,
+  PRIMARY KEY (`seq`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
