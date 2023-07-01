@@ -18,3 +18,7 @@ CREATE TABLE `tb_member` (
   `updatedate` date DEFAULT current_timestamp(),
   PRIMARY KEY (`idx`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+
+
+
+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
