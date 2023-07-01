@@ -2,6 +2,7 @@ package com.tjoeun.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.URLEncoder;
 import java.sql.Date;
 
 import javax.servlet.RequestDispatcher;
@@ -67,7 +68,7 @@ public class registerController extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8"); // 받을때
-		//response.setContentType("text/html; charset=UTF-8"); // 보낼때
+		response.setContentType("text/html; charset=UTF-8"); // 보낼때
 		
 		System.out.println(request.getParameter("name"));
 		
@@ -86,7 +87,7 @@ public class registerController extends HttpServlet {
 		
 		memberService.getInstance().insertMember(dto);
 		
-		response.sendRedirect(request.getContextPath() +  "/index.jsp");
+		response.sendRedirect(request.getContextPath() +  "/login/complete.do?id=" + URLEncoder.encode(dto.getName(), "UTF-8"));
 	}
 
 }

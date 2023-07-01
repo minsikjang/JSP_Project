@@ -49,11 +49,30 @@
 			return;
 		}
 		
-		function passwordCheck() {
-			$("#passwordConfirm").next().remove("span");
-			if ($("#password").val() != $("#passwordConfirm").val()) {
-				var al = $("<span style='color:red; position: absolute; top: 20px; left: 300px;'>비밀번호를 확인하세요.</span>");
-				$("#passwordConfirm").after(al);
+		function passwordValidation(obj) {
+			$(obj).next().remove("span");
+			
+			var warning = $("<span style='color:red; position: absolute; top: 8px; left: 300px;'>문자,숫자,특수문자 포함 8~12자리를 입력하세요.</span>");
+			$(obj).after(warning);
+			
+			var pw = $(obj).val();
+			var num = pw.search(/[0-9]/g);
+			var eng = pw.search(/[a-z]/ig);
+			var spe = pw.search(/[`~!@@#$%^&*|₩₩₩'₩";:₩/?]/gi);
+			
+			if (pw.length > 7 && (num>-1 && eng>-1 && spe>-1)) {
+				$(obj).next().remove("span");
+			}
+		}
+		
+		function passwordCheck(obj) {
+			$(obj).next().remove("span");
+			
+			var warning = $("<span style='color:red; position: absolute; top: 20px; left: 300px;'>비밀번호를 확인하세요.</span>");
+			$(obj).after(warning);
+			
+			if ($("#password").val() == $(obj).val()) {
+				$(obj).next().remove("span");
 			}
 		}
 		
@@ -74,7 +93,12 @@
 					$("#addr1").attr("disabled", false);
 					
 					var submitBool = onSubmit();	
-					if(!submitBool) {
+					if (submitBool) {
+						if (confirm("회원가입하시겠습니까?")) {
+							return submitBool;
+						}
+						return false;
+					} else {
 						$("#postcode").attr("disabled", true);
 						$("#addr1").attr("disabled", true);
 					}
@@ -108,13 +132,13 @@
 			</div>
 			<div class="input-group mb-3">
 			    <div class="form-floating">
-			      <input type="password" class="form-control vaildation" id="password" placeholder="패스워드" name="pwd">
+			      <input type="password" class="form-control vaildation" id="password" placeholder="패스워드" name="pwd" maxlength="12" onfocus="passwordValidation(this)" onchange="passwordValidation(this)">
 			      <label for="floatingPassword">비밀번호</label>
 			    </div>
 		    </div>
 		    <div class="input-group mb-3">
 			    <div class="form-floating">
-			      <input type="password" class="form-control vaildation" id="passwordConfirm" placeholder="패스워드 확인" name="pwd2" onchange="passwordCheck()">
+			      <input type="password" class="form-control vaildation" id="passwordConfirm" placeholder="패스워드 확인" name="pwd2" maxlength="12" onfocus="passwordCheck(this)" onchange="passwordCheck(this)">
 			      <label for="floatingPassword">비밀번호 확인</label>
 			    </div>
 		    </div>
@@ -168,7 +192,7 @@
 			</div>
 			<div class="input-group mb-3">
 				<div class="form-floating">
-		  			<input type="text" class="form-control" id="addr1" placeholder="주소" name="addr1" disabled="disabled">
+		  			<input type="text" class="form-control vaildation" id="addr1" placeholder="주소" name="addr1" disabled="disabled">
 		  			<label for="floatingInput">주소</label>
 		  		</div>
 	  		</div>

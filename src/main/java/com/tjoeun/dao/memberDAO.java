@@ -18,7 +18,7 @@ public class memberDAO {
 		return instance;
 	}
 	
-	public ArrayList<memberDTO> selectList(SqlSession mapper) {
+	public ArrayList<memberDTO> memberList(SqlSession mapper) {
 		
 		return (ArrayList<memberDTO>) mapper.selectList("memberList");
 	}

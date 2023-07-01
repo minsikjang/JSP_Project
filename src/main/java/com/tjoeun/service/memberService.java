@@ -24,7 +24,7 @@ public class memberService {
 		SqlSession mapper = MySession.getSession();
 		memberDAO dao = memberDAO.getInstance();
 		
-		List<memberDTO> memberList = dao.selectList(mapper);
+		List<memberDTO> memberList = dao.memberList(mapper);
 		
 		mapper.close();
 		return memberList;
