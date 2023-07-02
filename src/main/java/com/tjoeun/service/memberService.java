@@ -20,14 +20,24 @@ public class memberService {
 		return instance;
 	}
 	
-	public List<memberDTO> memberList(int currentPage) {
+	public List<memberDTO> memberList(memberDTO dto) {
 		SqlSession mapper = MySession.getSession();
 		memberDAO dao = memberDAO.getInstance();
 		
-		List<memberDTO> memberList = dao.memberList(mapper);
+		List<memberDTO> memberList = dao.memberList(mapper, dto);
 		
 		mapper.close();
 		return memberList;
+	}
+	
+	public int memberCount(memberDTO dto) {
+		SqlSession mapper = MySession.getSession();
+		memberDAO dao = memberDAO.getInstance();
+		
+		int memberCount = dao.memberCount(mapper, dto);
+		
+		mapper.close();
+		return memberCount;
 	}
 	
 	public memberDTO getMember(memberDTO dto) {
@@ -50,4 +60,15 @@ public class memberService {
 		mapper.commit();
 		mapper.close();
 	}
+
+	public void deleteMember(String[] delData) {
+		SqlSession mapper = MySession.getSession();
+		memberDAO dao = memberDAO.getInstance();
+		
+		dao.deleteMember(mapper, delData);
+		
+		mapper.commit();
+		mapper.close();
+	}
+
 }

@@ -20,11 +20,18 @@
 		<main class="form-signin w-60 m-auto" align="center" style="width: 500px; position: relative; top: 25%">
 			<img class="mb-4" src="<%= request.getContextPath() %>/images/logo.png" alt="" width="280" style="position:relative; top:30px;">
 		    <br><br><br>
+		    
+		    
 	    	<h3><%= request.getAttribute("id") %>님 회원가입이 완료되었습니다.</h3>
 			<br><br>
-		    <a href="<%= request.getContextPath() %>/login/login.do" class="btn btn-primary w-50 py-2">로그인</a>
-		    <br><br>
-		    <a href="<%= request.getContextPath() %>/index.jsp" class="btn btn-warning w-50 py-2">홈으로</a>
+			<div class="row">
+			  <div class="col">
+			    <a href="<%= request.getContextPath() %>/login/login.do" class="btn btn-primary w-100 py-2">로그인</a>
+			  </div>
+			  <div class="col">
+			    <a href="<%= request.getContextPath() %>/index.jsp" class="btn btn-warning w-100 py-2">홈으로</a>
+			  </div>
+			</div>
 		</main>
 	</div>
 </body>

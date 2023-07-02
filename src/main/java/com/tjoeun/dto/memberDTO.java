@@ -20,6 +20,8 @@ public class memberDTO {
 	private Date regdate;
 	private Date updatedate;
 	
+	private int currentPage;
+	
 	public int getIdx() {
 		return idx;
 	}
@@ -111,10 +113,38 @@ public class memberDTO {
 		this.updatedate = updatedate;
 	}
 	
+	public int getCurrentPage() {
+		return currentPage;
+	}
+	public void setCurrentPage(int currentPage) {
+		this.currentPage = currentPage;
+	}
+	
 	@Override
 	public String toString() {
 		return "memberDTO [idx=" + idx + ", id=" + id + ", name=" + name + ", password=" + password + ", addr1=" + addr1
 				+ ", addr2=" + addr2 + ", phone=" + phone + ", regdate=" + regdate + ", updatedate=" + updatedate + "]";
 	}
 	
+	public String queryString() {
+		StringBuilder sb = new StringBuilder();
+		
+		if (id != null) {
+			sb.append("&id=" + id);
+		}
+		
+		if (name != null) {
+			sb.append("&name=" + name);
+		}
+		
+		if (phone != null) {
+			sb.append("&phone=" + phone);
+		}
+		
+		if (useYN != null) {
+			sb.append("&useYN=" + useYN);
+		}
+		
+		return sb.toString();
+	}
 }

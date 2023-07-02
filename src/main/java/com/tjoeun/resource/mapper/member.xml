@@ -3,10 +3,50 @@
 <mapper namespace="com.tjoeun.dao.memberDAO">
 
 	<!-- 1페이지 분량의 메인글을 얻어온다. -->
-	<select id="memberList" resultType="com.tjoeun.dto.memberDTO">
+	<select id="memberList" parameterType="com.tjoeun.dto.memberDTO" resultType="com.tjoeun.dto.memberDTO">
 		<![CDATA[
-		select * from tb_member
+		select * from tb_member where 1=1
 		]]>
+		
+		<if test="id != null">
+			<![CDATA[ and id like concat('%',#{id},'%') ]]>
+		</if>
+		
+		<if test="name != null">
+			<![CDATA[ and name like concat('%',#{name},'%') ]]>
+		</if>
+		
+		<if test="phone != null">
+			<![CDATA[ and phone like concat('%',#{phone},'%') ]]>
+		</if>
+		
+		<if test='useYN != null and useYN != "ALL"'>
+			<![CDATA[ and useYN=#{useYN} ]]>
+		</if>
+		
+		<![CDATA[order by idx desc limit #{currentPage}, 10]]>
+	</select>
+	
+	<select id="memberCount" parameterType="com.tjoeun.dto.memberDTO" resultType="int">
+		<![CDATA[
+		select count(*) from tb_member where 1=1
+		]]>
+		
+		<if test="id != null">
+			<![CDATA[ and id like concat('%',#{id},'%') ]]>
+		</if>
+		
+		<if test="name != null">
+			<![CDATA[ and name like concat('%',#{name},'%') ]]>
+		</if>
+		
+		<if test="phone != null">
+			<![CDATA[ and phone like concat('%',#{phone},'%') ]]>
+		</if>
+		
+		<if test='useYN != null and useYN != "ALL"'>
+			<![CDATA[ and useYN=#{useYN} ]]>
+		</if>
 	</select>
 	
 	<select id="getMember" parameterType="com.tjoeun.dto.memberDTO" resultType="com.tjoeun.dto.memberDTO">
@@ -25,8 +65,15 @@
 		INSERT INTO tb_member
 		(id, name, password, jumin1, jumin2, postcode, addr1, addr2, email1, email2, phone)
 		VALUES(#{id}, #{name}, #{password}, #{jumin1}, #{jumin2}, #{postcode}, #{addr1}, #{addr2}, #{email1}, #{email2}, #{phone})
-		
 	</insert>
+	
+	<delete id="deleteMember" parameterType="java.util.ArrayList">
+		DELETE FROM test.tb_member WHERE idx IN
+		<foreach collection="array" item="item" index="index" separator="," open="(" close=")">
+            #{item}
+        </foreach> 
+	</delete>
+	
 </mapper>
 
 
