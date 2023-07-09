@@ -9,6 +9,16 @@
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
 	<script type="text/javascript" src="<%= request.getContextPath() %>/js/jquery-3.7.0.js"></script>
 	<script type="text/javascript" src="<%= request.getContextPath()%>/js/common.js"></script> 
+	
+	<style type="text/css">
+		.btn {
+			background-color: rgb(29, 128, 159);
+		}
+		
+		.btn:hover {
+			background-color: rgba(29, 128, 159, 0.8);
+		}
+	</style>
 	<script type="text/javascript">
 		$(() => {
 			var cookies = document.cookie.split('; ');
@@ -56,7 +66,7 @@
 		    <button class="btn btn-primary w-100 py-2" type="submit">로그인</button>
 		    <br><br>
 		    <p class="mt-5 mb-3 text-body-secondary" style="display: inline; margin-top: 10px;">
-		    	<label style="float: left;">펜션에 오신 것을 환영합니다.</label>
+		    	<label style="float: left;">더조은 호텔에 오신 것을 환영합니다.</label>
 		    	<a href="<%= request.getContextPath() %>/login/register.do" style="float: right; text-decoration: none;">회원가입</a>
 	    	</p>
 		  </form>

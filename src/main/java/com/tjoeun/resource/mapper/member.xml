@@ -52,6 +52,10 @@
 	<select id="getMember" parameterType="com.tjoeun.dto.memberDTO" resultType="com.tjoeun.dto.memberDTO">
 		select * from tb_member where 1=1 
 		
+		<if test="idx != 0">
+			<![CDATA[ and idx=#{idx} ]]>
+		</if>
+		
 		<if test="id != null">
 			<![CDATA[ and id=#{id} ]]>
 		</if>
@@ -63,17 +67,45 @@
 	
 	<insert id="insertMember" parameterType="com.tjoeun.dto.memberDTO">
 		INSERT INTO tb_member
-		(id, name, password, jumin1, jumin2, postcode, addr1, addr2, email1, email2, phone)
-		VALUES(#{id}, #{name}, #{password}, #{jumin1}, #{jumin2}, #{postcode}, #{addr1}, #{addr2}, #{email1}, #{email2}, #{phone})
+		(id, name, password, jumin1, jumin2, postcode, addr1, addr2, email1, email2, phone, regdate, updatedate)
+		VALUES(#{id}, #{name}, #{password}, #{jumin1}, #{jumin2}, #{postcode}, #{addr1}, #{addr2}, #{email1}, #{email2}, #{phone}, now(), now())
 	</insert>
 	
 	<delete id="deleteMember" parameterType="java.util.ArrayList">
-		DELETE FROM test.tb_member WHERE idx IN
+		DELETE FROM tb_member WHERE idx IN
 		<foreach collection="array" item="item" index="index" separator="," open="(" close=")">
             #{item}
         </foreach> 
 	</delete>
 	
+	<update id="updateMember" parameterType="com.tjoeun.dto.memberDTO">
+		<![CDATA[
+		UPDATE tb_member
+		SET name=#{name}, password=#{password}, jumin1=#{jumin1}, jumin2=#{jumin2}, postcode=#{postcode}, addr1=#{addr1}, addr2=#{addr2}, 
+			email1=#{email1}, email2=#{email2}, phone=#{phone}, useYN=#{useYN}, updatedate=now()
+		WHERE idx=#{idx};
+		]]>
+	</update>
+	
+	<update id="withdrawMember" parameterType="com.tjoeun.dto.memberDTO">
+		<![CDATA[
+		UPDATE tb_member
+		SET useYN='N', updatedate=now()
+		WHERE id=#{id};
+		]]>
+	</update>
+	
+	<select id="getLogin" parameterType="com.tjoeun.dto.memberDTO" resultType="com.tjoeun.dto.memberDTO">
+		select * from tb_member where useYN='Y' 
+		
+		<if test="id != null">
+			<![CDATA[ and id=#{id} ]]>
+		</if>
+		
+		<if test="password != null">
+			<![CDATA[ and password=#{password} ]]>
+		</if>
+	</select>
 </mapper>
 
 

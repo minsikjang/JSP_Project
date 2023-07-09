@@ -31,7 +31,7 @@ public class memberDAO {
 	public memberDTO getMember(SqlSession mapper, memberDTO dto) {
 		return (memberDTO) mapper.selectOne("getMember", dto);
 	}
-
+	
 	public void insertMember(SqlSession mapper, memberDTO dto) {
 		mapper.insert("insertMember", dto);
 	}
@@ -40,4 +40,15 @@ public class memberDAO {
 		mapper.delete("deleteMember", delData);
 	}
 
+	public void updateMember(SqlSession mapper, memberDTO dto) {
+		mapper.update("updateMember", dto);
+	}
+
+	public void withdrawMember(SqlSession mapper, memberDTO dto) {
+		mapper.update("withdrawMember", dto);
+	}
+
+	public memberDTO getLogin(SqlSession mapper, memberDTO dto) {
+		return (memberDTO) mapper.selectOne("getLogin", dto);
+	}
 }

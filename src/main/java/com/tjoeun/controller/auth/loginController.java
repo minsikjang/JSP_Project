@@ -1,6 +1,7 @@
 package com.tjoeun.controller.auth;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -9,6 +10,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import com.tjoeun.dto.userDTO;
+import com.tjoeun.service.userService;
 
 
 @WebServlet("/auth/login.do")
@@ -31,18 +35,35 @@ public class loginController extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		response.setCharacterEncoding("UTF-8");
+		response.setContentType("text/html; charset=UTF-8");
+		
 		String id = (String) request.getParameter("id");
-		String pwd = (String) request.getParameter("pwd");
+		String password = (String) request.getParameter("pwd");
 		
-		System.out.println((String) request.getParameter("addr"));
-		
-		if (id != null && pwd != null) {
-			HttpSession session = request.getSession();
-
-			session.setAttribute("ID", id);
+		if (id != null && password != null) {
+			userDTO dto = new userDTO();
+			dto.setId(id);
+			dto.setPassword(password);
 			
-			response.sendRedirect(request.getContextPath() + (path == null ? "/admin" : path));
-		} else {
+			userDTO user = userService.getInstance().getUser(dto);
+			//userDTO adminUser = new userDTO();
+			
+			if (user == null) {
+				PrintWriter writer = response.getWriter();
+				writer.println("<script>alert('사번정보를 확인 할 수 없습니다.'); window.location.href='" + request.getContextPath() + "/auth/login.do'</script>"); 
+				writer.close();
+			} else {
+				HttpSession session = request.getSession();
+
+				session.setAttribute("ID", user.getId());
+				session.setAttribute("Name", user.getName());
+				
+				//session.setAttribute("ID", adminUser.getId());
+				//session.setAttribute("Name", adminUser.getName());
+				
+				response.sendRedirect(request.getContextPath() + (path == null ? "/admin" : path));
+			}
 			
 		}
 	}

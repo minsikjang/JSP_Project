@@ -26,9 +26,20 @@ public class loginController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
 		
-		String viewpage = "/WEB-INF/views/login/login.jsp";
-		RequestDispatcher dispatcher = request.getRequestDispatcher(viewpage);
-		dispatcher.forward(request, response);
+		String id = request.getParameter("id");
+		
+		if (id != null) {
+			request.setAttribute("id", id);
+			
+			String viewpage = "/WEB-INF/views/login/complete.jsp";
+			RequestDispatcher dispatcher = request.getRequestDispatcher(viewpage);
+			dispatcher.forward(request, response);
+			
+		} else {
+			String viewpage = "/WEB-INF/views/login/login.jsp";
+			RequestDispatcher dispatcher = request.getRequestDispatcher(viewpage);
+			dispatcher.forward(request, response);
+		}
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -48,8 +59,8 @@ public class loginController extends HttpServlet {
 		memberDTO dto = new memberDTO();
 		dto.setId(id);
 		dto.setPassword(password);
-		
-		memberDTO user = memberService.getInstance().getMember(dto);
+		//System.out.println(dto.toString());
+		memberDTO user = memberService.getInstance().getLogin(dto);
 		
 		if (user == null) {
 			response.setCharacterEncoding("UTF-8");

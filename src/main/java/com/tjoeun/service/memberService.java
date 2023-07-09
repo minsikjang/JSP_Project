@@ -71,4 +71,36 @@ public class memberService {
 		mapper.close();
 	}
 
+	public void updateMember(memberDTO dto) {
+		SqlSession mapper = MySession.getSession();
+		memberDAO dao = memberDAO.getInstance();
+		
+		dao.updateMember(mapper, dto);
+		
+		mapper.commit();
+		mapper.close();
+		
+	}
+
+	public void withdrawMember(memberDTO dto) {
+		SqlSession mapper = MySession.getSession();
+		memberDAO dao = memberDAO.getInstance();
+		
+		dao.withdrawMember(mapper, dto);
+		
+		mapper.commit();
+		mapper.close();
+	}
+
+	public memberDTO getLogin(memberDTO dto) {
+		SqlSession mapper = MySession.getSession();
+		memberDAO dao = memberDAO.getInstance();
+		
+		
+		memberDTO user = dao.getLogin(mapper, dto);
+		
+		mapper.close();
+		return user;
+	}
+
 }

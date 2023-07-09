@@ -122,8 +122,10 @@ public class memberDTO {
 	
 	@Override
 	public String toString() {
-		return "memberDTO [idx=" + idx + ", id=" + id + ", name=" + name + ", password=" + password + ", addr1=" + addr1
-				+ ", addr2=" + addr2 + ", phone=" + phone + ", regdate=" + regdate + ", updatedate=" + updatedate + "]";
+		return "memberDTO [idx=" + idx + ", id=" + id + ", name=" + name + ", password=" + password + ", postcode="
+				+ postcode + ", jumin1=" + jumin1 + ", jumin2=" + jumin2 + ", addr1=" + addr1 + ", addr2=" + addr2
+				+ ", email1=" + email1 + ", email2=" + email2 + ", phone=" + phone + ", useYN=" + useYN + ", regdate="
+				+ regdate + ", updatedate=" + updatedate + ", currentPage=" + currentPage + "]";
 	}
 	
 	public String queryString() {

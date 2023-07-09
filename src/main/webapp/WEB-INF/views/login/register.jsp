@@ -89,18 +89,14 @@
 		function submitConfirm() {
 			if ($("#password").val() == $("#passwordConfirm").val()) {
 				if (idCheck) {
-					$("#postcode").attr("disabled", false);
-					$("#addr1").attr("disabled", false);
-					
 					var submitBool = onSubmit();	
 					if (submitBool) {
 						if (confirm("회원가입하시겠습니까?")) {
+							$("#postcode").attr("disabled", false);
+							$("#addr1").attr("disabled", false);
 							return submitBool;
 						}
 						return false;
-					} else {
-						$("#postcode").attr("disabled", true);
-						$("#addr1").attr("disabled", true);
 					}
 					
 					return submitBool;

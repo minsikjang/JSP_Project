@@ -1,12 +1,12 @@
 @charset "UTF-8";
 
 .conA {
-    height: 400px;
+    height: 100vh;
 }
 
 .slide {
     position: absolute;
-    height: 400px;
+    height: 100vh;
     width: 100%;
     background-position: center;
     background-size: cover;
@@ -15,16 +15,19 @@
 .img1 {
     background-image: url(../img/main1.jpg);
     animation: slide_img_1 15s infinite;
+    height: 100vh;
 }
 
 .img2 {
     background-image: url(../img/main2.jpg);
     animation: slide_img_2 15s infinite;
+    height: 100vh;
 }
 
 .img3 {
     background-image: url(../img/main3.jpg);
     animation: slide_img_3 15s infinite;
+    height: 100vh;
 }
 
 @keyframes slide_img_1 {

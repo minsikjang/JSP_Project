@@ -14,8 +14,8 @@ CREATE TABLE `tb_member` (
   `email2` varchar(100) DEFAULT NULL,
   `phone` varchar(11) DEFAULT NULL,
   `useYN` char(1) DEFAULT 'Y',
-  `regdate` date DEFAULT current_timestamp(),
-  `updatedate` date DEFAULT current_timestamp(),
+  `regdate` date DEFAULT NULL,
+  `updatedate` date DEFAULT NULL,
   PRIMARY KEY (`idx`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 

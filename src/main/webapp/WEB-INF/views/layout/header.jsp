@@ -9,7 +9,7 @@
     	<span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    	<span class="navbar-nav ms-auto mt-2 mt-lg-0">${sessionScope.ID} 님 환영합니다.</span>
+    	<span class="navbar-nav ms-auto mt-2 mt-lg-0">${sessionScope.Name} 님 환영합니다.</span>
         <button class="btn" id="logout">
     		<i class="bi bi-box-arrow-right"></i>
         </button>

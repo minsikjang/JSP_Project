@@ -17,6 +17,7 @@
     <a class="list-group-item list-group-item-action list-group-item-light p-3 <%= select.equals("room.jsp") ? "active" : "" %>" href="<%=request.getContextPath()%>/admin/room.do">객실관리</a>
     <a class="list-group-item list-group-item-action list-group-item-light p-3 <%= select.equals("user.jsp") ? "active" : "" %>" href="<%=request.getContextPath()%>/admin/user.do">직원관리</a>
     <a class="list-group-item list-group-item-action list-group-item-light p-3 <%= select.equals("notice.jsp") ? "active" : "" %>" href="<%=request.getContextPath()%>/admin/notice.do">공지관리</a>
+    <a class="list-group-item list-group-item-action list-group-item-light p-3 <%= select.equals("event.jsp") ? "active" : "" %>" href="<%=request.getContextPath()%>/admin/event.do">이벤트</a>
     <a class="list-group-item list-group-item-action list-group-item-light p-3 <%= select.equals("status.jsp") ? "active" : "" %>" href="<%=request.getContextPath()%>/admin/status.do">통계</a>
 </div>
 

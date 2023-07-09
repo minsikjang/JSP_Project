@@ -11,6 +11,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.json.simple.JSONObject;
 
@@ -70,24 +71,53 @@ public class registerController extends HttpServlet {
 		request.setCharacterEncoding("UTF-8"); // 받을때
 		response.setContentType("text/html; charset=UTF-8"); // 보낼때
 		
-		System.out.println(request.getParameter("name"));
+		//System.out.println(request.getParameter("name"));
+		String idx = request.getParameter("idx");
 		
 		memberDTO dto = new memberDTO();
-		dto.setId(request.getParameter("id"));
-		dto.setName(request.getParameter("name"));
-		dto.setPassword(request.getParameter("pwd"));
-		dto.setPostcode(Integer.parseInt(request.getParameter("postcode")));
-		dto.setJumin1(request.getParameter("jumin1"));
-		dto.setJumin2(request.getParameter("jumin2"));
-		dto.setEmail1(request.getParameter("email1"));
-		dto.setEmail2(request.getParameter("email2"));
-		dto.setAddr1(request.getParameter("addr1"));
-		dto.setAddr2(request.getParameter("addr2"));
-		dto.setPhone(request.getParameter("phone"));
+		if (idx == null) {
+			
+			dto.setId(request.getParameter("id"));
+			dto.setName(request.getParameter("name"));
+			dto.setPassword(request.getParameter("pwd"));
+			dto.setPostcode(Integer.parseInt(request.getParameter("postcode")));
+			dto.setJumin1(request.getParameter("jumin1"));
+			dto.setJumin2(request.getParameter("jumin2"));
+			dto.setEmail1(request.getParameter("email1"));
+			dto.setEmail2(request.getParameter("email2"));
+			dto.setAddr1(request.getParameter("addr1"));
+			dto.setAddr2(request.getParameter("addr2"));
+			dto.setPhone(request.getParameter("phone"));
+			
+			memberService.getInstance().insertMember(dto);
+			
+			response.sendRedirect(request.getContextPath() +  "/login/login.do?id=" + URLEncoder.encode(dto.getName(), "UTF-8"));
+		} else {
+			dto.setIdx(Integer.parseInt(request.getParameter("idx")));
+			dto.setId(request.getParameter("id"));
+			dto.setName(request.getParameter("name"));
+			dto.setPassword(request.getParameter("pwd"));
+			dto.setPostcode(Integer.parseInt(request.getParameter("postcode")));
+			dto.setJumin1(request.getParameter("jumin1"));
+			dto.setJumin2(request.getParameter("jumin2"));
+			dto.setEmail1(request.getParameter("email1"));
+			dto.setEmail2(request.getParameter("email2"));
+			dto.setAddr1(request.getParameter("addr1"));
+			dto.setAddr2(request.getParameter("addr2"));
+			dto.setPhone(request.getParameter("phone"));
+			dto.setUseYN("Y");
+			
+			memberService.getInstance().updateMember(dto);
+			
+			HttpSession session = request.getSession();
+
+			session.setAttribute("memberID", dto.getId());
+			session.setAttribute("memberName", dto.getName());
+			
+			response.sendRedirect(request.getContextPath());
+		}
 		
-		memberService.getInstance().insertMember(dto);
 		
-		response.sendRedirect(request.getContextPath() +  "/login/complete.do?id=" + URLEncoder.encode(dto.getName(), "UTF-8"));
 	}
 
 }
